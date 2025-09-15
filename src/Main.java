@@ -1,5 +1,11 @@
+import model.Library;
+import ui.ConsoleMenu;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        Library.initBooks();
+        Library.initUsers();
+
+        (new ConsoleMenu()).start();
     }
 }
