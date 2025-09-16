@@ -45,13 +45,19 @@ public class MenuBooksSearch extends MenuAction {
                 break;
         }
 
-        System.out.println("-------------------------------------");
-
-        int i = 1;
+        int i = 0;
         for (Map.Entry<Integer, Book> entryBook : Library.getBooks(this.getCaption(), searchCriteria).entrySet()) {
-            System.out.printf("№: %s\n", i++);
+            if (i == 0) {
+                System.out.println("-------------------------------------");
+            }
+            System.out.printf("№: %s\n", ++i);
             System.out.printf("Id: %s\n", entryBook.getKey());
             (new BookUI(entryBook.getValue())).show();
+        }
+
+        if (i == 0) {
+            System.out.println("Книги не найдены");
+            System.out.println("-------------------------------------");
         }
     }
 

@@ -14,7 +14,7 @@ public class MenuUserAdd extends MenuAction {
         String email;
 
         System.out.println("-------------------------------------");
-        System.out.println("Новая книга");
+        System.out.println("Новый пользователь");
 
         do {
             System.out.print("Введите имя: ");
@@ -24,7 +24,15 @@ public class MenuUserAdd extends MenuAction {
         do {
             System.out.print("Введите email: ");
             email = ConsoleMenu.getScanner().nextLine().trim();
-        } while (email.isBlank() || !Service.isEmailValid(email));
+
+            if (email.isEmpty()) {
+                break;
+            } else if (!Service.isEmailValid(email)) {
+                System.out.println("Email имеет недопустимый формат");
+            } else {
+                break;
+            }
+        } while (true);
 
         Library.addUser(new User(name, email));
 

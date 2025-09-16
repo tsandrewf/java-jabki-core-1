@@ -11,7 +11,6 @@ public class MenuUsersView extends MenuAction {
     }
 
     public void run() {
-        System.out.println("public void run()");
         int i = 1;
         for (Map.Entry<Integer, User> entryUser : Library.getUsers().entrySet()) {
             System.out.printf("№: %s\n", i++);

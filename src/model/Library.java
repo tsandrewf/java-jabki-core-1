@@ -28,10 +28,10 @@ public class Library {
     static public Map<Integer, Book> getBooks(String searchName, String searchCriteria) {
         return switch (searchName) {
             case "Поиск книг по названию" -> books.entrySet().stream()
-                    .filter(e -> e.getValue().getTitle().equalsIgnoreCase(searchCriteria))
+                    .filter(e -> e.getValue().getTitle().toLowerCase().contains(searchCriteria.toLowerCase()))
                     .collect(HashMap::new, (m, e) -> m.put(e.getKey(), e.getValue()), Map::putAll);
             case "Поиск книг по автору" -> books.entrySet().stream()
-                    .filter(e -> e.getValue().getAuthor().equalsIgnoreCase(searchCriteria))
+                    .filter(e -> e.getValue().getAuthor().toLowerCase().contains(searchCriteria.toLowerCase()))
                     .collect(HashMap::new, (m, e) -> m.put(e.getKey(), e.getValue()), Map::putAll);
             case "Поиск книг по году" -> books.entrySet().stream()
                     .filter(e -> Integer.toString(e.getValue().getYear()).equals(searchCriteria))
