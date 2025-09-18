@@ -1,10 +1,10 @@
-import model.Library;
+import service.LibraryService;
 import ui.ConsoleMenu;
 
 public class Main {
     public static void main(String[] args) {
-        Library.initBooks();
-        Library.initUsers();
+        LibraryService.initBooks();
+        LibraryService.initUsers();
 
         (new ConsoleMenu()).start();
     }

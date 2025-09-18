@@ -1,8 +1,9 @@
 package ui;
 
 import model.User;
-import model.Library;
-import service.Service;
+import service.UserValidationService;
+import service.ValidationService;
+import service.LibraryService;
 
 public class MenuUserAdd extends MenuAction {
     protected MenuUserAdd() {
@@ -18,23 +19,25 @@ public class MenuUserAdd extends MenuAction {
 
         do {
             System.out.print("Введите имя: ");
-            name = ConsoleMenu.getScanner().nextLine().trim();
-        } while (name.isBlank());
+            name = ConsoleMenu.getScanner().nextLine();
+            if (name.isBlank()) {
+                System.out.println("Добавление нового пользователя отменено");
+                return;
+            }
+        } while (!UserValidationService.isUserNameValid(name));
 
         do {
             System.out.print("Введите email: ");
             email = ConsoleMenu.getScanner().nextLine().trim();
 
-            if (email.isEmpty()) {
+            if (ValidationService.isEmailValid(email)) {
                 break;
-            } else if (!Service.isEmailValid(email)) {
-                System.out.println("Email имеет недопустимый формат");
             } else {
-                break;
+                System.out.println("Email имеет недопустимый формат");
             }
         } while (true);
 
-        Library.addUser(new User(name, email));
+        LibraryService.addUser(new User(name, email));
 
         System.out.println("Новый пользователь добавлен");
     }

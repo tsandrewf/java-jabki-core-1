@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.Map;
 
 import model.Book;
-import model.Library;
+import service.LibraryService;
 
 public class MenuBooksSearch extends MenuAction {
     protected MenuBooksSearch(String searchCaption) {
@@ -46,12 +46,11 @@ public class MenuBooksSearch extends MenuAction {
         }
 
         int i = 0;
-        for (Map.Entry<Integer, Book> entryBook : Library.getBooks(this.getCaption(), searchCriteria).entrySet()) {
+        for (Map.Entry<Integer, Book> entryBook : LibraryService.getBooks(this.getCaption(), searchCriteria).entrySet()) {
             if (i == 0) {
                 System.out.println("-------------------------------------");
             }
             System.out.printf("№: %s\n", ++i);
-            System.out.printf("Id: %s\n", entryBook.getKey());
             (new BookUI(entryBook.getValue())).show();
         }
 
@@ -59,9 +58,5 @@ public class MenuBooksSearch extends MenuAction {
             System.out.println("Книги не найдены");
             System.out.println("-------------------------------------");
         }
-    }
-
-    private String getCaption(String searchCriteria) {
-        return "Поиск книг " + searchCriteria;
     }
 }

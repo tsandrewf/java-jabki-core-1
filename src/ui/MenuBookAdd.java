@@ -1,9 +1,11 @@
 package ui;
 
-import java.time.LocalDate;
-
-import model.Library;
+import exception.InvalidYearException;
+import exception.InvalidTotalCopiesException;
 import model.Book;
+import service.BookService;
+import service.BookValidationService;
+import service.LibraryService;
 
 public class MenuBookAdd extends MenuAction {
     protected MenuBookAdd() {
@@ -22,46 +24,38 @@ public class MenuBookAdd extends MenuAction {
         do {
             System.out.print("Введите название: ");
             title = ConsoleMenu.getScanner().nextLine().trim();
-        } while (title.isBlank());
+            if (title.isBlank()) {
+                System.out.println("Добавление новой книги отменено");
+                return;
+            }
+        } while (!BookValidationService.isTitleValid(title));
 
         do {
             System.out.print("Введите автора: ");
             author = ConsoleMenu.getScanner().nextLine().trim();
-        } while (author.isBlank());
+        } while (!BookValidationService.isAuthorValid(author));
 
-        while (true) {
+        do {
             System.out.print("Введите год: ");
-            String nextLine = ConsoleMenu.getScanner().nextLine().trim();
             try {
-                year = Integer.parseInt(nextLine);
-                int yearMin = 2000;
-                int yearMax = LocalDate.now().getYear();
-                if (year < yearMin || year > yearMax) {
-                    System.out.printf("Год должен быть не меньше %s и не больше %s\n", yearMin, yearMax);
-                    continue;
-                }
+                year = BookService.getYear(ConsoleMenu.getScanner().nextLine().trim());
                 break;
-            } catch (NumberFormatException ex) {
-                System.out.println("Введите число");
+            } catch (InvalidYearException ex) {
+                System.out.println(ex.getMessage());
             }
-        }
+        } while (true);
 
         while (true) {
             System.out.print("Введите количество копий: ");
-            String nextLine = ConsoleMenu.getScanner().nextLine().trim();
             try {
-                totalCopies = Integer.parseInt(nextLine);
-                if (totalCopies < 1) {
-                    System.out.println("Количество копий должно быть больше 1");
-                    continue;
-                }
+                totalCopies = BookService.getTotalCopies(ConsoleMenu.getScanner().nextLine().trim());
                 break;
-            } catch (NumberFormatException ex) {
-                System.out.println("Введите число");
+            } catch (InvalidTotalCopiesException ex) {
+                System.out.println(ex.getMessage());
             }
         }
 
-        Library.addBook(new Book(title, author, year, totalCopies));
+        LibraryService.addBook(new Book(title, author, year, totalCopies));
 
         System.out.println("Новая книга добавлена");
     }

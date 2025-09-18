@@ -11,6 +11,7 @@ public class UserUI {
 
     public void show() {
         try {
+            System.out.printf("Id: %s\n", user.getId());
             System.out.printf("Имя: %s\n", user.getName());
             System.out.printf("Email: %s\n", user.getEmail());
         } catch (NullPointerException ex) {

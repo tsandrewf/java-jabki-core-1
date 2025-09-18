@@ -10,7 +10,7 @@ public class BookUI {
     }
 
     public void show() {
-        System.out.printf("Название: %s\n", book.getTitle());
+        System.out.printf("Id: %s\n", book.getId());
         System.out.printf("Автор: %s\n", book.getAuthor());
         System.out.printf("Год: %s\n", book.getYear());
         System.out.printf("Всего копий: %s\n", book.getTotalCopies());
