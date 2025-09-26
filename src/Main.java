@@ -1,5 +1,11 @@
+import service.LibraryService;
+import ui.ConsoleMenu;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        LibraryService.initBooks();
+        LibraryService.initUsers();
+
+        (new ConsoleMenu()).start();
     }
 }
