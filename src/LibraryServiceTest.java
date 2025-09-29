@@ -1,7 +1,5 @@
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import model.Book;
 import model.Library;
 import model.User;
@@ -9,17 +7,20 @@ import service.LibraryService;
 
 import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.*;
+import exception.UserNotFoundException;
+
 class LibraryServiceTest {
     @Test
     void getBooksTest() {
         LibraryService.initBooks();
 
-        Book book1 = new Book("Му-Му", "Тургенев", 2025,5);
+        Book book1 = new Book("Му-Му", "Тургенев", 2025,1);
         Book book2 = new Book("Война и мир", "Толстой", 2024,4);
 
         {
             Map<Integer, Book> books = LibraryService.getBooks("Поиск книг", null);
-            assertEquals(books.size(), 2);
+            assertEquals(books.size(), 4);
 
             Book book = books.get(1);
             assertEquals(book.getTitle(), book1.getTitle());
@@ -74,7 +75,7 @@ class LibraryServiceTest {
     }
 
     @Test
-    void getUserTest() {
+    void getUserTest() throws UserNotFoundException {
         LibraryService.initUsers();
 
         User user = Library.getUser(1);
@@ -82,5 +83,7 @@ class LibraryServiceTest {
 
         assertEquals(user.getName(), user1.getName());
         assertEquals(user.getEmail(), user1.getEmail());
+
+        assertThrowsExactly(UserNotFoundException.class, () -> Library.getUser(-1));
     }
 }

@@ -1,5 +1,6 @@
 package ui;
 
+import exception.UserNotFoundException;
 import model.Library;
 
 public class MenuUserSearch extends MenuAction {
@@ -25,6 +26,10 @@ public class MenuUserSearch extends MenuAction {
             }
         }
 
-        (new UserUI(Library.getUser(id))).show();
+        try {
+            (new UserUI(Library.getUser(id))).show();
+        } catch (UserNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }

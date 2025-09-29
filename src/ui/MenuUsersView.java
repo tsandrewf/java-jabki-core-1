@@ -14,8 +14,8 @@ public class MenuUsersView extends MenuAction {
         int i = 1;
         for (Map.Entry<Integer, User> entryUser : Library.getUsers().entrySet()) {
             System.out.printf("№: %s\n", i++);
-            //System.out.printf("Id: %s\n", entryUser.getKey());
             (new UserUI(entryUser.getValue())).show();
+            System.out.println("-------------------------------------");
         }
     }
 }

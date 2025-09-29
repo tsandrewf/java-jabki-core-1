@@ -19,14 +19,19 @@ public class ConsoleMenu {
                                             new MenuBooksSearch("Поиск книг по автору"),
                                             new MenuBooksSearch("Поиск книг по году")
                                     }
-                            )
+                            ),
+                            new MenuBookLoan(),
+                            new MenuBookReturn(),
+                            new MenuBookLoansHistory(),
+                            new MenuOverdueLoan(),
                     }),
             new MenuItem(
                     "Работа с пользователями",
                     new MenuAction[]{
                             new MenuUserAdd(),
                             new MenuUsersView(),
-                            new MenuUserSearch()
+                            new MenuUserSearch(),
+                            new MenuUserLoansHistory(),
                     })
     };
 
