@@ -52,6 +52,7 @@ public class MenuBooksSearch extends MenuAction {
             }
             System.out.printf("№: %s\n", ++i);
             (new BookUI(entryBook.getValue())).show();
+            System.out.println("-------------------------------------");
         }
 
         if (i == 0) {

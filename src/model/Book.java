@@ -41,4 +41,12 @@ public class Book {
     public int getAvailableCopies() {
         return this.availableCopies;
     }
+
+    public void loan() {
+        this.availableCopies--;
+    }
+
+    public void returnLoan() {
+        this.availableCopies++;
+    }
 }
