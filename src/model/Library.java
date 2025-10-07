@@ -37,6 +37,9 @@ public class Library {
     }
 
     static public boolean isUserLoanBook(int userId, int bookId) throws UserNotFoundException {
-        return Library.getUser(userId).getCurrentLoans().stream().map(Loan::getBookId).toList().contains(bookId);
+        return Library.getUser(userId).getCurrentLoans().stream()
+                .map(Loan::getBookId)
+                .toList()
+                .contains(bookId);
     }
 }

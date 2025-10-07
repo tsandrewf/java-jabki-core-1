@@ -25,7 +25,9 @@ public class MenuUserLoansHistory extends MenuAction {
 
         try {
             (new UserUI(Library.getUser(this.userId))).show();
-            for (Loan loan : Library.getLoans().stream().filter(l -> l.getUserId() == this.userId).toList()) {
+            for (Loan loan : Library.getLoans().stream()
+                    .filter(l -> l.getUserId() == this.userId)
+                    .toList()) {
                 System.out.println("Книга:");
                 (new BookUI(Library.getBook(loan.getBookId()))).show();
                 System.out.printf("Выдана: %s\n", loan.getLoanDate());

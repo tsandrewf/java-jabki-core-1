@@ -15,7 +15,7 @@ public class LoanValidationService {
         }
 
         List<Loan> currentLoans = Library.getUser(loan.getUserId()).getCurrentLoans();
-        int maxBooksPerUser = 2;
+        int maxBooksPerUser = 3;
         if (currentLoans.size() >= maxBooksPerUser) {
             throw new InvalidUserCurrentLoansException(maxBooksPerUser);
         }

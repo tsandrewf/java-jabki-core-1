@@ -1,7 +1,6 @@
 package ui;
 
 import exception.OperationCancelException;
-import exception.UserNotFoundException;
 import model.Library;
 import model.Loan;
 
@@ -23,8 +22,9 @@ public class MenuBookLoansHistory extends MenuAction {
             return;
         }
 
-        //(new BookUI(Library.getBook(this.bookId))).show();
-        for (Loan loan : Library.getLoans().stream().filter(l -> l.getBookId() == this.bookId).toList()) {
+        for (Loan loan : Library.getLoans().stream()
+                .filter(l -> l.getBookId() == this.bookId)
+                .toList()) {
             System.out.println("Книга:");
             (new BookUI(Library.getBook(loan.getBookId()))).show();
             System.out.printf("Выдана: %s\n", loan.getLoanDate());

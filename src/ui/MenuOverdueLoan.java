@@ -18,7 +18,9 @@ public class MenuOverdueLoan extends MenuAction {
         System.out.println("-------------------------------------");
         System.out.println(this.getCaption());
 
-        for (Loan loan : Library.getLoans().stream().filter(l -> l.getReturnDate() == null && ChronoUnit.DAYS.between(l.getLoanDate(), LocalDate.now()) > 30).toList()) {
+        for (Loan loan : Library.getLoans().stream()
+                .filter(l -> l.getReturnDate() == null && ChronoUnit.DAYS.between(l.getLoanDate(), LocalDate.now()) > 30)
+                .toList()) {
             System.out.println("Книга:");
             (new BookUI(Library.getBook(loan.getBookId()))).show();
             System.out.printf("Выдана: %s\n", loan.getLoanDate());
